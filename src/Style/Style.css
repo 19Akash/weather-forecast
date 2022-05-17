@@ -1,0 +1,33 @@
+.dayBackground{
+
+    background-color: antiquewhite;
+
+}
+.nightBackground{
+    background-color: black;
+}
+.icon{
+    size: 50rem;
+}
+.headerContent{
+    display: flex;
+}
+.humadity{
+    margin-bottom: 0%;
+    padding: 0%;
+    margin-left: 2rem;
+    margin-top: .9rem;
+}
+.wind{
+    margin-bottom: -4rem;
+    padding: 0%;
+    margin-left: 2rem;
+    margin-top: .4rem;
+}
+.secondHeader{
+    display: flex;
+    margin: .5rem;
+}
+.secondHeaderContent{
+    margin: .5rem;
+}
