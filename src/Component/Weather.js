@@ -1,13 +1,15 @@
 import React, {useState, useEffect } from 'react';
 import '../Style/Style.css';
+import Chart from './Chart';
+import Card from './Card';
 
 const Weather = (props) =>{
     var today = new Date()
     var curHr = today.getHours()
 
     const [light,setLight]=useState("");
-    const [curr,setCurr]=useState(props.weatherData.main.temp);
-    const [sign,setSign]=useState(`\u00b0C`)
+    const [curr,setCurr]=useState(props.weatherData.current.temp);
+    const [sign,setSign]=useState(`\u00b0F`)
    
     useEffect(()=>{
         if (curHr < 18) {
@@ -19,39 +21,36 @@ const Weather = (props) =>{
     },[light])
     
     const handleTemp=()=>{
-         setCurr(props.weatherData.main.temp);
-         setSign(`\u00b0C`);
+         setCurr(props.weatherData.current.temp);
+         setSign(`\u00b0F`);
     }
     const handleHumidity=()=>{
-        setCurr(props.weatherData.main.humidity);
+        setCurr(props.weatherData.current.humidity);
         setSign(`%`);
     }
     const handleWind=()=>{
-        setCurr(props.weatherData.wind.speed);
+        setCurr(props.weatherData.current.wind_speed);
         setSign(`km/h`);
     }
    
     return(
        <div className={light}>
            <div className='headerContent'>
-                <img className= "icon" src={`http://openweathermap.org/img/w/${props.weatherData.weather[0].icon}.png`} />
-                <h3 className="temp">{curr} {sign}</h3>
+                <img style={{width: "10rem" }} className= "icon" src={`http://openweathermap.org/img/w/${props.weatherData.current.weather[0].icon}.png`} /> 
+                <h1 className="temp">{curr} {sign}</h1>
                 <div>
-                    <h5 className='humadity'>Humidity : {props.weatherData.main.humidity} %</h5>
-                    <h5 className='wind'>Wind : {props.weatherData.wind.speed} km/h</h5>
-                    
+                    <h2 className='humadity'>Humidity : {props.weatherData.current.humidity} %</h2>
+                    <h2 className='wind'>Wind : {props.weatherData.current.wind_speed} km/h</h2>     
                 </div>
            </div>
            <div className='secondHeader'>
-               <p className='secondHeaderContent' onClick={handleTemp}><strong>Temperature</strong></p> 
-               <p className='secondHeaderContent' onClick={()=>handleHumidity()}><strong>Humidity</strong></p> 
-               <p className='secondHeaderContent' onClick={()=>handleWind()}><strong>Wind</strong></p> 
-           </div>
-          
-          <p>Sunrise: {props.weatherData.sys.sunrise}</p>
-          <p>Sunset: {props.weatherData.sys.sunset}</p>
-          <p>Description: {props.weatherData.weather[0].description}</p>
-      
+               <h2 className='secondHeaderContent' onClick={handleTemp}><strong>Temperature </strong></h2> 
+               <h2 className='secondHeaderContent' onClick={handleHumidity}><strong>Humidity </strong></h2> 
+               <h2 className='secondHeaderContent' onClick={handleWind}><strong>Wind</strong></h2> 
+            </div> 
+           <Chart prevData={props.weatherData}/> 
+           <Card  prevData={props.weatherData}/>
+
     </div>
   )}
   
